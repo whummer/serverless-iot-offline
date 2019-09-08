@@ -21,16 +21,8 @@
   },
   "homepage": "https://github.com/mitipi/serverless-iot-offline#readme",
   "dependencies": {
-    "aws-sdk": "^2.307.0",
-    "aws-sdk-mock": "^4.1.0",
     "lodash": "^4.17.11",
-    "mosca": "^2.8.3",
-    "mqtt": "^2.18.8",
-    "mqtt-match": "^2.0.1",
-    "redis": "^2.8.0"
-  },
-  "peerDependencies": {
-    "serverless-offline": "*"
+    "mqtt-match": "^2.0.1"
   },
   "jest": {
     "testMatch": [
