@@ -1,4 +1,3 @@
-const AWS = require('aws-sdk')
 const _ = require('lodash')
 let log
 
@@ -21,6 +20,8 @@ module.exports.applyActions = (actions, payload, _log) => {
 }
 
 const handleDynamoDBV2Action = (tableName, payload) => {
+  const AWS = require('aws-sdk')
+
   if (!tableName) {
     return log('DynamoDBv2 error: table name not defined')
   }

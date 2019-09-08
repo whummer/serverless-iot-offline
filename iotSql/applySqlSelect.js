@@ -2,22 +2,18 @@ const _ = require('lodash')
 const evalInContext = require('./eval')
 
 const BASE64_PLACEHOLDER = '*b64'
-const brace = new Buffer('{')[0]
-const bracket = new Buffer('[')[0]
-const doubleQuote = new Buffer('"')[0]
+const brace = '{'
+const bracket = '['
+const doubleQuote = '"'
 
 // to avoid stopping here when Stop on Caught Exceptions is on
 const maybeParseJSON = val => {
-  switch (val[0]) {
-    case brace:
-    case bracket:
-    case doubleQuote:
+  if ([brace, bracket, doubleQuote].includes(val[0])) {
       try {
         return JSON.parse(val)
       } catch (err) {
       }
   }
-
   return val
 }
 
