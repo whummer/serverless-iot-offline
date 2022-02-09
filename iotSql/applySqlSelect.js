@@ -1,7 +1,6 @@
 const _ = require('lodash')
 const evalInContext = require('./eval')
 
-const BASE64_PLACEHOLDER = '*b64'
 const brace = '{'
 const bracket = '['
 const doubleQuote = '"'
@@ -21,11 +20,6 @@ const applySelect = ({select, payload, context}) => {
   let event = {}
   const json = maybeParseJSON(payload)
 
-  // if payload is Buffer initialize Buffer class from base64 string
-  const payloadReplacement = Buffer.isBuffer(payload)
-    ? `new Buffer('${payload.toString('base64')}', 'base64')`
-    : payload
-
   // iterate over select parsed array
   // ex. [{alias: 'serialNumber', field: 'topic(2)'}, {field: 'state.reported.preferences.*'}]
   for (let part of select) {
@@ -41,9 +35,8 @@ const applySelect = ({select, payload, context}) => {
       }
       // check if field is sqlFunction
     } else if (Object.keys(context).some((sqlFunc) => (new RegExp(`${sqlFunc}\\((.*)\\)`).test(field)))) {
-      let js = field.replace(BASE64_PLACEHOLDER, payloadReplacement)
       // execute sqlFunction
-      event[alias || field.replace(/\(()\)/, '')] = evalInContext(js, context)
+      event[alias || field.replace(/\(()\)/, '')] = evalInContext(field, context)
     } else {
       // event is some property on shadow
       let propPath = field.split('.')
