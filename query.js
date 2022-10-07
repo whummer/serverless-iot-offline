@@ -4,8 +4,7 @@ const {parseSelect} = require('./iotSql/parseSql');
 const {applySelect} = require('./iotSql/applySqlSelect');
 const {applyWhereClause} = require('./iotSql/applySqlWhere');
 const mqttMatch = require('mqtt-match');
-const sqlFunctions = require('./iotSql/sqlFunctions');
-
+const {topic, accountid, clientid, encode, timestamp} = require('./iotSql/sqlFunctions');
 
 const log = console.log;
 
@@ -24,11 +23,11 @@ const applyMessageToQuery = (query, topic, message) => {
       select,
       payload: message,
       context: {
-        topic: (index) => sqlFunctions.topic(index, topic),
-        clientid: () => sqlFunctions.clientid(topic),
-        timestamp: () => sqlFunctions.timestamp(),
-        accountid: () => sqlFunctions.accountid(),
-        encode: (field, encoding) => sqlFunctions.encode(message, field, encoding)
+        topic: (index) => topic(index, topic),
+        clientid: () => clientid(topic),
+        timestamp: () => timestamp(),
+        accountid: () => accountid(),
+        encode: (field, encoding) => encode(message, field, encoding)
       }
     });
 

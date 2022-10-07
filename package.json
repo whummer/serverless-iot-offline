@@ -1,6 +1,6 @@
 {
   "name": "serverless-iot-offline",
-  "version": "0.1.4",
+  "version": "1.0.0",
   "description": "Start AWS IoT service offline. Manages topic subscriptions, lifecycle events, thing shadow management and rule engine with limited SQL syntax support.",
   "main": "index.js",
   "scripts": {
@@ -21,8 +21,16 @@
   },
   "homepage": "https://github.com/mitipi/serverless-iot-offline#readme",
   "dependencies": {
-    "lodash": "^4.17.11",
-    "mqtt-match": "^2.0.1"
+    "aws-sdk": "^2.663.0",
+    "aws-sdk-mock": "^5.1.0",
+    "lodash": "^4.17.15",
+    "mosca": "^2.8.3",
+    "mqtt": "^3.0.0",
+    "mqtt-match": "^2.0.3",
+    "redis": "^3.0.2"
+  },
+  "peerDependencies": {
+    "serverless-offline": "^6.1.0"
   },
   "jest": {
     "testMatch": [
@@ -30,6 +38,6 @@
     ]
   },
   "devDependencies": {
-    "jest": "^23.5.0"
+    "jest": "^25.4.0"
   }
 }
