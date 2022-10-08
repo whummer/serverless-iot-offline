@@ -13,18 +13,18 @@ const applyMessageToRawQuery = (sql, topic, message) => {
   return applyMessageToQuery(parsed, topic, message);
 };
 
-const applyMessageToQuery = (query, topic, message) => {
+const applyMessageToQuery = (query, topicName, message) => {
   const result = [];
   const {name, select, whereClause} = query;
-  const topicMatches = mqttMatch(query.topic, topic);
+  const topicMatches = mqttMatch(query.topic, topicName);
 
   if (topicMatches && applyWhereClause(message, whereClause, log, name)) {
     const event = applySelect({
       select,
       payload: message,
       context: {
-        topic: (index) => topic(index, topic),
-        clientid: () => clientid(topic),
+        topic: (index) => topic(index, topicName),
+        clientid: () => clientid(topicName),
         timestamp: () => timestamp(),
         accountid: () => accountid(),
         encode: (field, encoding) => encode(message, field, encoding)

@@ -1,4 +1,4 @@
-const SQL_REGEX = /^SELECT (.*) FROM '([^']+)'/
+const SQL_REGEX = /^SELECT (.*) FROM '([^']+)'/i
 const SELECT_PART_REGEX = /^(.*?)(?: as (.*))?$/i
 const FIELDS_REGEX = /((\w+[\n\r\s]*\([^)]*\))|([^\n\r\s(,]+))([\n\r\s]+as[\n\r\s]+\w*)?/g
 const WHERE_REGEX = /WHERE (.*)/
